@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="PixelArtImageView">
+        <attr name="canvasWidth" format="integer" />
+        <attr name="canvasHeight" format="integer" />
+        <attr name="originalImage" format="reference"/>
+    </declare-styleable>
+
+</resources>
