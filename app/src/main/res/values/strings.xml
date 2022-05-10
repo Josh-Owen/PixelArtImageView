@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PixelArtImageView</string>
+    <string name="button_pixelate">Pixelate</string>
 </resources>
