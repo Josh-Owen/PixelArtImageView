@@ -27,7 +27,6 @@ Github's [release's page](https://github.com/Josh-Owen/PixelArtImageView/release
 Or use Gradle:
 
 ```
-gradle
 allprojects {
     repositories {
         maven { url "https://jitpack.io" }
