@@ -2,8 +2,8 @@
 
 [![](https://jitpack.io/v/Josh-Owen/PixelArtImageView.svg)](https://jitpack.io/#Josh-Owen/PixelArtImageView)
 
-PixelArtImageView is a lightweight library used to convert regular images into their pixel art 
-targeting Android API 21 and above. The view extends [ImageView](https://developer.android.com/reference/android/widget/ImageView) 
+PixelArtImageView is a lightweight library used to convert regular images into pixel art which targets
+Android API 21 and above. The view extends [ImageView](https://developer.android.com/reference/android/widget/ImageView) 
 behaviour and can therefore use any of it's properties. 
 The library also implements callbacks allowing you intercept essential events such as once an 
 image has begun being converted and upon completion in addition to providing some alternative configuration options.  
