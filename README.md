@@ -12,9 +12,7 @@ image has begun being converted and upon completion in addition to providing som
 
 ![](Images/Image1.JPG)![](Images/Image2.JPG)
 
-Samples:
-Canvas Width x 88
-Canvas Height x 88
+Width x 88 & Height x 88 samples 
 
 ## Getting started
 
