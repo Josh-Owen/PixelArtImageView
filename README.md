@@ -6,9 +6,15 @@ PixelArtImageView is a lightweight library used to convert regular images into t
 targeting Android API 21 and above. The view extends [ImageView](https://developer.android.com/reference/android/widget/ImageView) 
 behaviour and can therefore use any of it's properties. 
 The library also implements callbacks allowing you intercept essential events such as once an 
-image has begun being converted and upon completion in addition to providing some alternative configuration options. 
+image has begun being converted and upon completion in addition to providing some alternative configuration options.  
+
+
 
 ![](Images/Image1.JPG)![](Images/Image2.JPG)
+
+Samples:
+Canvas Width x 88
+Canvas Height x 88
 
 ## Getting started
 
