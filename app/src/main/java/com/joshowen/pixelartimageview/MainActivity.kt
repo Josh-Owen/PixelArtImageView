@@ -20,10 +20,10 @@ class MainActivity : AppCompatActivity() {
         btnPixelate.setOnClickListener {
 
             ivPixelatedImage
+                .load(R.drawable.mountains)
                 .setGridHeight(88)
                 .setGridWidth(88)
-                .load(R.drawable.mountains)
-                .onBegin {   pbLoading.visibility = View.VISIBLE }
+                .onStart {   pbLoading.visibility = View.VISIBLE }
                 .onFinished {  pbLoading.visibility = View.GONE }
                 .build()
 

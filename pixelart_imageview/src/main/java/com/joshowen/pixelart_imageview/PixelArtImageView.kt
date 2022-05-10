@@ -64,14 +64,14 @@ class PixelArtImageView(context: Context, attrs: AttributeSet?) : AppCompatImage
             visibility = if (isImageHiddenByDefault) View.INVISIBLE else View.VISIBLE
 
             if (isAutomaticPixelationEnabled) {
-                startConversion()
+                beginConversion()
             }
         }
     }
     //endregion
 
-    //region Conversions
-    private fun startConversion() {
+    //region Image Conversion
+    private fun beginConversion() {
 
         if (drawable == null) {
             throw IllegalStateException("No image provided to PixelArtImageView.")
@@ -97,44 +97,7 @@ class PixelArtImageView(context: Context, attrs: AttributeSet?) : AppCompatImage
             }
         }
     }
-    //endregion
 
-    //region Builder Functions
-
-    fun load(resourceId: Int) : PixelArtImageView {
-        visibility = if (isImageHiddenByDefault) View.INVISIBLE else View.VISIBLE
-        this.setImageResource(resourceId)
-        return this
-    }
-
-    fun build() : PixelArtImageView {
-        this.startConversion()
-        return this
-    }
-
-    fun setGridWidth(gridWidth : Int) : PixelArtImageView {
-        this.canvasWidth = gridWidth
-        return this
-    }
-
-    fun setGridHeight(gridHeight : Int) : PixelArtImageView  {
-        this.canvasHeight = gridHeight
-        return this
-    }
-
-    fun onBegin(onStart: () -> Unit) : PixelArtImageView{
-        this.onStart = onStart
-        return this
-    }
-
-    fun onFinished(onFinished: () -> Unit) : PixelArtImageView {
-        this.onFinished = onFinished
-        return this
-    }
-
-    //endregion
-
-    //region Bitmap Extensions
     private fun Bitmap.convertToPixelatedBitmap(): Bitmap {
 
         val blockSizeX = this.width / canvasWidth
@@ -174,5 +137,45 @@ class PixelArtImageView(context: Context, attrs: AttributeSet?) : AppCompatImage
         }
         return this
     }
+    //endregion
+
+    //region Builder Functions
+
+    fun load(resourceId: Int) : PixelArtImageView {
+        visibility = if (isImageHiddenByDefault) View.INVISIBLE else View.VISIBLE
+        this.setImageResource(resourceId)
+        return this
+    }
+
+    fun build() : PixelArtImageView {
+        this.beginConversion()
+        return this
+    }
+
+    fun setOriginalImageHiddenByDefault(isHidden : Boolean) : PixelArtImageView {
+        this.isImageHiddenByDefault = isHidden
+        return this
+    }
+
+    fun setGridWidth(gridWidth : Int) : PixelArtImageView {
+        this.canvasWidth = gridWidth
+        return this
+    }
+
+    fun setGridHeight(gridHeight : Int) : PixelArtImageView  {
+        this.canvasHeight = gridHeight
+        return this
+    }
+
+    fun onStart(onStart: () -> Unit) : PixelArtImageView{
+        this.onStart = onStart
+        return this
+    }
+
+    fun onFinished(onFinished: () -> Unit) : PixelArtImageView {
+        this.onFinished = onFinished
+        return this
+    }
+
     //endregion
 }
