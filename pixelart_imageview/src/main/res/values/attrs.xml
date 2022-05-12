@@ -2,8 +2,8 @@
 <resources>
 
     <declare-styleable name="PixelArtImageView">
-        <attr name="canvasWidth" format="integer" />
-        <attr name="canvasHeight" format="integer" />
+        <attr name="gridWidth" format="integer" />
+        <attr name="gridHeight" format="integer" />
         <attr name="originalImageHiddenByDefault" format="boolean"/>
         <attr name="enableAutomaticallyPixelate" format="boolean"/>
     </declare-styleable>
