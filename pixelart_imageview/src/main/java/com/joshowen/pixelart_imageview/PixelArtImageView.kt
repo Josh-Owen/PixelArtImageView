@@ -17,8 +17,8 @@ class PixelArtImageView(context: Context, attrs: AttributeSet?) : AppCompatImage
     //region Variables
 
     //region Image Properties
-    private var canvasWidth = DEFAULT_CANVAS_WIDTH
-    private var canvasHeight = DEFAULT_CANVAS_HEIGHT
+    private var canvasGridWidth = DEFAULT_CANVAS_GRID_WIDTH
+    private var canvasGridHeight = DEFAULT_CANVAS_GRID_HEIGHT
 
     private var isImageHiddenByDefault = DEFAULT_IMAGE_HIDDEN_BY_DEFAULT
     private var isAutomaticPixelationEnabled = DEFAULT_AUTOMATICALLY_PIXELATE
@@ -31,8 +31,9 @@ class PixelArtImageView(context: Context, attrs: AttributeSet?) : AppCompatImage
     //endregion
 
     //region Callbacks
-    private var onFinished: (() -> Unit)? = null
     private var onStart: (() -> Unit)? = null
+    private var onFinished: (() -> Unit)? = null
+    private var callback : ImagePixelationListener? = null
     //endregion
 
     //endregion
@@ -41,13 +42,13 @@ class PixelArtImageView(context: Context, attrs: AttributeSet?) : AppCompatImage
     init {
         context.theme.obtainStyledAttributes(attrs, R.styleable.PixelArtImageView, 0, 0).apply {
 
-            canvasWidth =
-                getInteger(R.styleable.PixelArtImageView_canvasWidth, DEFAULT_CANVAS_WIDTH)
+            canvasGridWidth =
+                getInteger(R.styleable.PixelArtImageView_gridWidth, DEFAULT_CANVAS_GRID_WIDTH)
 
-            canvasHeight =
-                getInteger(R.styleable.PixelArtImageView_canvasHeight, DEFAULT_CANVAS_HEIGHT)
+            canvasGridHeight =
+                getInteger(R.styleable.PixelArtImageView_gridHeight, DEFAULT_CANVAS_GRID_HEIGHT)
 
-            if (canvasWidth <= 0 || canvasHeight <= 0) {
+            if (canvasGridWidth <= 0 || canvasGridHeight <= 0) {
                 throw IllegalStateException("canvasWidth or canvasHeight needs to be initialised with values greater than 0.")
             }
 
@@ -82,6 +83,7 @@ class PixelArtImageView(context: Context, attrs: AttributeSet?) : AppCompatImage
         onStart?.let {
             it()
         }
+        callback?.onStart()
 
         pixelExecutor.execute {
 
@@ -94,19 +96,20 @@ class PixelArtImageView(context: Context, attrs: AttributeSet?) : AppCompatImage
                 onFinished?.let {
                     it()
                 }
+                callback?.onFinished()
             }
         }
     }
 
     private fun Bitmap.convertToPixelatedBitmap(): Bitmap {
 
-        val blockSizeX = this.width / canvasWidth
-        val blockSizeY = this.height / canvasHeight
+        val blockSizeX = this.width / canvasGridWidth
+        val blockSizeY = this.height / canvasGridHeight
         val blockPerimeter = blockSizeX * blockSizeY
 
-        for (i in 0 until canvasWidth) {
+        for (i in 0 until canvasGridWidth) {
             val startX = i * blockSizeX
-            for (j in 0 until canvasHeight) {
+            for (j in 0 until canvasGridHeight) {
 
                 val startY = j * blockSizeY
 
@@ -128,8 +131,8 @@ class PixelArtImageView(context: Context, attrs: AttributeSet?) : AppCompatImage
                     blockOfPixels,
                     0,
                     blockSizeX,
-                    i * blockSizeX,
-                    j * blockSizeY,
+                    startX,
+                    startY,
                     blockSizeX,
                     blockSizeY
                 )
@@ -147,23 +150,13 @@ class PixelArtImageView(context: Context, attrs: AttributeSet?) : AppCompatImage
         return this
     }
 
-    fun build() : PixelArtImageView {
-        this.beginConversion()
-        return this
-    }
-
-    fun setOriginalImageHiddenByDefault(isHidden : Boolean) : PixelArtImageView {
-        this.isImageHiddenByDefault = isHidden
-        return this
-    }
-
     fun setGridWidth(gridWidth : Int) : PixelArtImageView {
-        this.canvasWidth = gridWidth
+        this.canvasGridWidth = gridWidth
         return this
     }
 
     fun setGridHeight(gridHeight : Int) : PixelArtImageView  {
-        this.canvasHeight = gridHeight
+        this.canvasGridHeight = gridHeight
         return this
     }
 
@@ -174,6 +167,21 @@ class PixelArtImageView(context: Context, attrs: AttributeSet?) : AppCompatImage
 
     fun onFinished(onFinished: () -> Unit) : PixelArtImageView {
         this.onFinished = onFinished
+        return this
+    }
+
+    fun addPixelationListener(callback : ImagePixelationListener) : PixelArtImageView {
+        this.callback = callback
+        return this
+    }
+
+    fun setOriginalImageHiddenByDefault(isHidden : Boolean) : PixelArtImageView {
+        this.isImageHiddenByDefault = isHidden
+        return this
+    }
+
+    fun build() : PixelArtImageView {
+        this.beginConversion()
         return this
     }
 
