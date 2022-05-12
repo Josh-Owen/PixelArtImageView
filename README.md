@@ -8,10 +8,6 @@ behaviour and can therefore use any of it's properties.
 The library also implements callbacks allowing for you intercept events such as once an 
 image has begun being converted to pixel art and upon completion in addition to providing some alternative configuration options.
 
-![](Images/Image1.JPG)![](Images/Image3.JPG)![](Images/Image2.JPG)
-
-Samples: Canvas Width x 88 & Canvas Height x 88
-
 ## Getting started
 
 ### Download
@@ -130,8 +126,15 @@ Or in XML:
 app:originalImageHiddenByDefault="false"
 ```
 
+### Samples
+
+![](Images/Image1.JPG)![](Images/Image3.JPG)![](Images/Image2.JPG)
+
+Samples: Canvas Width x 88 & Canvas Height x 88
 
 Note: There are code samples demonstrating the usage of all of which in the demo project.
+
+### Thoughts
 
 And that is all folks! I am open to suggestions in how to further improve this library to increase
 it's utility.
