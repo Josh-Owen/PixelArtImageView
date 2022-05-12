@@ -14,7 +14,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/mountains2" />
+        app:srcCompat="@drawable/mountains" />
 
     <com.joshowen.pixelart_imageview.PixelArtImageView
         android:id="@+id/pixelArtImageView"
